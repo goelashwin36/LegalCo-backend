@@ -5,7 +5,6 @@ const dotenv = require('dotenv')
 var morgan = require('morgan')
 var cookies = require("cookie-parser");
 var bodyParser = require('body-parser')
-var cors = require('cors')
 const PORT = process.env.PORT || 3000;
 app.use(cors())
 
