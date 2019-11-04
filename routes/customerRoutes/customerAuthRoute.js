@@ -33,8 +33,9 @@ router.post('/login', (req, res) => {
         .then(data => {
             console.log(data)
             const cookieConfig = {
-                httpOnly: false,
-                maxAge: 10000000
+                httpOnly: true,
+                maxAge: 10000000,
+                secure: true
             }
             res.cookie('token', data.payload.token, cookieConfig).status(data.meta.code).send(data)
         })
