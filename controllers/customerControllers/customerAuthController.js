@@ -83,7 +83,6 @@ module.exports.loginUser = (email, password, auto, token) => {
     return new Promise((resolve, reject) => {
 
         if (auto == 1) {
-            console.log("Auto==1")
 
             if (!token) {
 

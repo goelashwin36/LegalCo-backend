@@ -23,15 +23,11 @@ router.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     let auto = req.body.auto
+    let token = req.header("Authorization").replace("Bearer ", "")
 
-    console.log(email)
-    console.log(password)
-    console.log(auto)
-    console.log(req.cookies.token)
 
-    authController.loginUser(email, password, auto, req.cookies.token)
+    authController.loginUser(email, password, auto, token)
         .then(data => {
-            console.log(data)
             const cookieConfig = {
                 httpOnly: true,
                 maxAge: 10000000,
