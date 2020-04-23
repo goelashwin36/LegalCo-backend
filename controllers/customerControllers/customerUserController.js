@@ -8,13 +8,11 @@ const UserTransactions = require("../../models/transactions/customerUserDbTransa
 
 module.exports.fetchProfile = (user) => {
     return new Promise((resolve, reject) => {
-        console.log(1)
-
 
         return User.findOne({
             _id: user
         }).then((user) => {
-            console.log(2)
+
 
             if (!user) {
                 reject({
@@ -26,7 +24,7 @@ module.exports.fetchProfile = (user) => {
                     }
                 })
             } else {
-                console.log(3)
+
                 resolve({
                     payload: {
                         user: user
@@ -46,38 +44,37 @@ module.exports.fetchProfile = (user) => {
 module.exports.requestService = (user, serviceId, name, description, addressLine1, addressLine2, city, state, pincode, mobile) => {
 
     return new Promise((resolve, reject) => {
-        console.log(serviceId)
         return Services.findOne({
-                serviceId: serviceId
-            }).then(service => {
-                if (!service) {
-                    reject({
-                        meta: {
-                            success: false,
-                            message: "Service not found",
-                            code: 404
+            serviceId: serviceId
+        }).then(service => {
+            if (!service) {
+                reject({
+                    meta: {
+                        success: false,
+                        message: "Service not found",
+                        code: 404
 
-                        }
-                    })
-                } else {
-                    return new Application({
-                        applicant: user,
-                        applicantName: name,
-                        applicantMobile: mobile,
-                        serviceId: serviceId,
-                        description: description,
-                        applicantAddress: {
-                            line1: addressLine1,
-                            line2: addressLine2,
-                            city: city,
-                            state: state,
-                            pincode: pincode
-                        },
-                        status: 'pending',
+                    }
+                })
+            } else {
+                return new Application({
+                    applicant: user,
+                    applicantName: name,
+                    applicantMobile: mobile,
+                    serviceId: serviceId,
+                    description: description,
+                    applicantAddress: {
+                        line1: addressLine1,
+                        line2: addressLine2,
+                        city: city,
+                        state: state,
+                        pincode: pincode
+                    },
+                    status: 'pending',
 
-                    }).save()
-                }
-            })
+                }).save()
+            }
+        })
             .catch(error => {
                 reject({
                     meta: {
@@ -169,11 +166,11 @@ module.exports.contact = (name, email, contact, description) => {
     return new Promise((resolve, reject) => {
 
         return new UserQuery({
-                name: name,
-                email: email,
-                contact: contact,
-                description: description
-            }).save()
+            name: name,
+            email: email,
+            contact: contact,
+            description: description
+        }).save()
             .then(data => {
                 resolve({
                     result: data,
@@ -184,15 +181,14 @@ module.exports.contact = (name, email, contact, description) => {
                     }
                 })
             }).catch(err => {
-                console.log(err)
-                
-                    reject({
-                        meta: {
-                            success: false,
-                            message: "An error occurred",
-                            code: 500
-                        }
-                    })
+
+                reject({
+                    meta: {
+                        success: false,
+                        message: "An error occurred",
+                        code: 500
+                    }
+                })
             })
     });
 }

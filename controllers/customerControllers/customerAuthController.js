@@ -204,7 +204,7 @@ module.exports.loginUser = (email, password, auto, token) => {
                     }, process.env.USER_TOKEN_SECRET, {
                         expiresIn: '12h'
                     })
-
+                    delete currentUser["password"]
                     resolve({
                         meta: {
                             success: true,
