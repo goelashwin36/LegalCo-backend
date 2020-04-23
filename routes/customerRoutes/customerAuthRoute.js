@@ -23,7 +23,11 @@ router.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     let auto = req.body.auto
-    let token = req.header("Authorization").replace("Bearer ", "")
+    let token = req.header("Authorization")
+    if(token){
+        token = token.replace("Bearer ", "")
+    }
+
 
 
     authController.loginUser(email, password, auto, token)
